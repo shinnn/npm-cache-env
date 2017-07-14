@@ -24,6 +24,7 @@
   ],
   "devDependencies": {
     "@shinnn/eslint-config-node": "^4.0.2",
+    "cacache": "^9.2.9",
     "eslint": "^4.2.0",
     "istanbul": "^0.4.5",
     "lstat": "^1.0.0",
