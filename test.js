@@ -16,8 +16,10 @@ test('npmCacheEnv() in a npm script', t => {
     t.ok(stat.isDirectory(), 'should get a path to the directory.');
   }).catch(t.fail);
 
-  getCacacheInfo(join(result, '_cacache'), 'make-fetch-happen:request-cache:https://registry.npmjs.org/cacache')
-  .then(({size}) => {
+  getCacacheInfo(
+    join(result, '_cacache'),
+    'make-fetch-happen:request-cache:https://registry.npmjs.org/lstat/-/lstat-1.0.0.tgz'
+  ).then(({size}) => {
     t.ok(Number.isSafeInteger(size), 'should get a path where packages are cached.');
   }).catch(t.fail);
 });
