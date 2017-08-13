@@ -7,6 +7,16 @@ const npmCacheEnv = require('.');
 const lstat = require('lstat');
 const test = require('tape');
 
+test('npmCacheEnv()', t => {
+  t.throws(
+    () => npmCacheEnv('a', 'b', 'c'),
+    /^RangeError.*Expected no arguments, but got 3 arguments\./,
+    'should reject any arguments.'
+  );
+
+  t.end();
+});
+
 test('npmCacheEnv() in a npm script', t => {
   t.plan(2);
 

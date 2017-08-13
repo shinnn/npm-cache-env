@@ -4,7 +4,13 @@ const {resolve} = require('path');
 
 const EXACT_KEY = 'npm_config_cache';
 
-module.exports = function npmCacheEnv() {
+module.exports = function npmCacheEnv(...args) {
+  const len = args.length;
+
+  if (len !== 0) {
+    throw new RangeError(`Expected no arguments, but got ${len} arguments.`);
+  }
+
   const keys = Object.keys(process.env);
 
   // https://github.com/npm/npm/commit/f3087cc58c903d9a70275be805ebaf0eadbcbe1b
