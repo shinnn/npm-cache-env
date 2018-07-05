@@ -1,67 +1,62 @@
 'use strict';
 
 const {join, resolve} = require('path');
+const {lstat} = require('fs').promises;
 
 const getCacacheInfo = require('cacache').get.info;
 const npmCacheEnv = require('.');
-const lstat = require('lstat');
 const test = require('tape');
 
 test('npmCacheEnv()', t => {
-  t.throws(
-    () => npmCacheEnv('a', 'b', 'c'),
-    /^RangeError.*Expected no arguments, but got 3 arguments\./,
-    'should reject any arguments.'
-  );
+	t.throws(
+		() => npmCacheEnv('a', 'b', 'c'),
+		/^RangeError.*Expected no arguments, but got 3 arguments\./,
+		'should reject any arguments.'
+	);
 
-  t.end();
+	t.end();
 });
 
-test('npmCacheEnv() in a npm script', t => {
-  t.plan(2);
+test('npmCacheEnv() in a npm script', async t => {
+	t.plan(2);
 
-  const result = npmCacheEnv();
+	const result = npmCacheEnv();
 
-  lstat(result).then(stat => {
-    t.ok(stat.isDirectory(), 'should get a path to the directory.');
-  }).catch(t.fail);
+	t.ok((await lstat(result)).isDirectory(), 'should get a path to the directory.');
 
-  getCacacheInfo(
-    join(result, '_cacache'),
-    'make-fetch-happen:request-cache:https://registry.npmjs.org/lstat/-/lstat-1.0.0.tgz'
-  ).then(({size}) => {
-    t.ok(Number.isSafeInteger(size), 'should get a path where packages are cached.');
-  }).catch(t.fail);
-});
-
-test('npmCacheEnv() with additional CLI arguments', t => {
-  /* eslint-disable camelcase */
-  delete process.env.npm_lifecycle_event;
-  process.env.npm_config_cache = 'foo';
-  process.env.npm_config_cachE = 'bar';
-  /* eslint-enable camelcase */
-
-  t.strictEqual(
-    npmCacheEnv(),
-    resolve('bar'),
-    'should find npm_config_cache case-insensitive.'
-  );
-
-  t.end();
+	t.ok(Number.isSafeInteger((await getCacacheInfo(
+		join(result, '_cacache'),
+		`make-fetch-happen:request-cache:https://registry.npmjs.org/eslint/-/eslint-${
+			require('eslint/package.json').version
+		}.tgz`
+	)).size), 'should get a path where packages are cached.');
 });
 
 test('npmCachePath() in a non-npm environment', t => {
-  for (const key of Object.keys(process.env)) {
-    if (key.toLowerCase() === 'npm_config_cache') {
-      delete process.env[key];
-    }
-  }
+	delete process.env.npm_lifecycle_event;
+	delete process.env.npm_config_cache;
 
-  t.strictEqual(
-    npmCacheEnv(),
-    null,
-    'should return null if it cannot resolve the path.'
-  );
+	t.equal(
+		npmCacheEnv(),
+		null,
+		'should return null if it cannot resolve the path.'
+	);
 
-  t.end();
+	t.end();
+});
+
+test('npmCacheEnv() with additional CLI arguments', t => {
+	delete process.env.npm_lifecycle_event;
+	/* eslint-disable camelcase */
+	process.env.npm_config_cache = 'foo';
+	process.env.npm_config_cachE = 'bar';
+	/* eslint-enable camelcase */
+
+	t.equal(
+		npmCacheEnv(),
+		resolve('bar'),
+		'should find npm_config_cache case-insensitive.'
+	);
+
+	t.end();
 });

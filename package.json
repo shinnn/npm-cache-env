@@ -1,36 +1,35 @@
 {
-  "name": "npm-cache-env",
-  "version": "1.0.1",
-  "description": "Get the path of npm cache folder from environment variables",
-  "repository": "shinnn/npm-cache-env",
-  "author": "Shinnosuke Watanabe (https://github.com/shinnn)",
-  "scripts": {
-    "pretest": "eslint --fix --format=codeframe index.js test.js",
-    "test": "istanbul cover test.js"
-  },
-  "license": "CC0-1.0",
-  "files": [
-    "index.js"
-  ],
-  "keywords": [
-    "npm",
-    "cache",
-    "env",
-    "environment",
-    "case-insensitive",
-    "path",
-    "directory",
-    "folder"
-  ],
-  "devDependencies": {
-    "@shinnn/eslint-config-node": "^4.0.2",
-    "cacache": "^9.2.9",
-    "eslint": "^4.2.0",
-    "istanbul": "^0.4.5",
-    "lstat": "^1.0.0",
-    "tape": "^4.7.0"
-  },
-  "eslintConfig": {
-    "extends": "@shinnn/node"
-  }
+	"name": "npm-cache-env",
+	"version": "1.0.1",
+	"description": "Get the path of npm cache folder from environment variables",
+	"repository": "shinnn/npm-cache-env",
+	"author": "Shinnosuke Watanabe (https://github.com/shinnn)",
+	"license": "CC0-1.0",
+	"scripts": {
+		"pretest": "eslint --fix --format=codeframe .",
+		"test": "nyc --reporter=html --reporter=text node test.js"
+	},
+	"files": [
+		"index.js"
+	],
+	"keywords": [
+		"npm",
+		"cache",
+		"env",
+		"environment",
+		"case-insensitive",
+		"path",
+		"directory",
+		"folder"
+	],
+	"devDependencies": {
+		"@shinnn/eslint-config-node": "^6.0.0",
+		"cacache": "^11.0.2",
+		"eslint": "^5.0.1",
+		"nyc": "^12.0.2",
+		"tape": "^4.9.1"
+	},
+	"eslintConfig": {
+		"extends": "@shinnn/node"
+	}
 }
