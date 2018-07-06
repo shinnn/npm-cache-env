@@ -1,12 +1,12 @@
 {
 	"name": "npm-cache-env",
-	"version": "2.0.0-0",
+	"version": "2.0.0",
 	"description": "Get the path of npm cache folder from environment variables",
 	"repository": "shinnn/npm-cache-env",
 	"author": "Shinnosuke Watanabe (https://github.com/shinnn)",
 	"license": "ISC",
 	"scripts": {
-		"pretest": "eslint --fix --format=codeframe .",
+		"pretest": "eslint .",
 		"test": "nyc --reporter=html --reporter=text node test.js"
 	},
 	"files": [
