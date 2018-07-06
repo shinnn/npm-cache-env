@@ -1,6 +1,6 @@
 # npm-cache-env
 
-[![NPM version](https://img.shields.io/npm/v/npm-cache-env.svg)](https://www.npmjs.com/package/npm-cache-env)
+[![npm version](https://img.shields.io/npm/v/npm-cache-env.svg)](https://www.npmjs.com/package/npm-cache-env)
 [![Build Status](https://travis-ci.org/shinnn/npm-cache-env.svg?branch=master)](https://travis-ci.org/shinnn/npm-cache-env)
 [![Coverage Status](https://img.shields.io/coveralls/shinnn/npm-cache-env.svg)](https://coveralls.io/github/shinnn/npm-cache-env?branch=master)
 
@@ -15,7 +15,7 @@ npmCacheEnv(); //=> '/foo/bar'
 
 ## Installation
 
-[Use npm.](https://docs.npmjs.com/cli/install)
+[Use](https://docs.npmjs.com/cli/install) [npm](https://docs.npmjs.com/getting-started/what-is-npm).
 
 ```
 npm install npm-cache-env
@@ -60,4 +60,4 @@ npmCacheEnv(); //=> '/path/to/current/working/directory/123'
 
 ## License
 
-[Creative Commons Zero v1.0 Universal](https://creativecommons.org/publicdomain/zero/1.0/deed)
+[ISC License](./LICENSE) © 2018 Shinnosuke Watanabe
